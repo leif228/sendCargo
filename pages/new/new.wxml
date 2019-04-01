@@ -1,8 +1,8 @@
 <!--new.wxml-->
 <form bindsubmit="onSubmit" bindreset="">
-  <view class="container">    
+  <view class="container">
     <view class='row' id="textareawrap" catchtap="onFocus">
-      <textarea fixed="true" class='text' maxlength="1000" style="height:{{height}}" focus='{{focus}}' name="content" placeholder="最多输入1000个字符" value='{{cargoValue}}'/>
+      <textarea fixed="true" class='text' maxlength="1000" style="height:{{height}}" focus='{{focus}}' name="content" placeholder="最多输入1000个字符" value='{{cargoValue}}' />
     </view>
 
 

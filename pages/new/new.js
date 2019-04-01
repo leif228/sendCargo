@@ -198,6 +198,20 @@ Page({
     });
   },
 
+  onDelete: function () {
+    wx.showModal({
+      title: '提示',
+      content: '确认删除？',
+      success(res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+
   onHide: function() {
     // 页面隐藏
   },
