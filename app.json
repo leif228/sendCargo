@@ -1,0 +1,36 @@
+{
+  "pages":[
+    "pages/mine/mine",
+    "pages/list/list",    
+    "pages/new/new",
+    "pages/entry/entry"
+  ],
+  "window":{
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#39b5de",
+    "navigationBarTitleText": "请船喇叭",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#eceff4"
+  },
+  "tabBar": {
+    "color": "#858585",
+    "selectedColor": "#39b5de",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list":[
+      {
+        "pagePath": "pages/list/list",
+        "iconPath": "images/icons/mark.png",
+        "selectedIconPath": "images/icons/markHL.png",
+        "text": "货盘"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "iconPath": "images/icons/mine.png",
+        "selectedIconPath": "images/icons/mineHL.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "debug": true
+}

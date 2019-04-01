@@ -1,0 +1,15 @@
+<!--new.wxml-->
+<form bindsubmit="onSubmit" bindreset="">
+  <view class="container">    
+    <view class='row' id="textareawrap" catchtap="onFocus">
+      <textarea fixed="true" class='text' maxlength="1000" style="height:{{height}}" focus='{{focus}}' name="content" placeholder="最多输入1000个字符" value='{{cargoValue}}'/>
+    </view>
+
+
+    <view class='bottom'>
+      <checkbox checked='true'>同步发布到请船易</checkbox>
+      <button open-type="share" formType="submit" class='btn success'>分享</button>
+      <button class='btn del' bindtap="onDelete">删除</button>
+    </view>
+  </view>
+</form>
