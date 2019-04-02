@@ -106,7 +106,7 @@ Page({
     //   modalShowStyle: "opacity:1;pointer-events:auto;"
     // })
     wx.navigateTo({
-      url: "../new/new?cargoId=" + 0,
+      url: "../new/new?cargoid=" + 0,
     });
   },
 
