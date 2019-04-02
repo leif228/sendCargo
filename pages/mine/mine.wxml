@@ -53,14 +53,14 @@
       <image class="add" mode="aspectFill" src="../../images/tabbar/add.png" bindtap="touchAddNew"></image>
     </view>
 
-    <view class="tablist" style='display:none'>
+    <!-- <view class="tablist" style='display:none'>
       <view wx:for="{{tabs}}" wx:for-index="idx" class="tab" bindtap="touchTab" style="{{item.extraStyle}}" id="{{idx}}">
         <view class="content" style="color:{{highLightIndex == idx ? '#54BFE2' : ''}};">
           <image class="image" mode="aspectFit" src="{{highLightIndex == idx ? item.iconActive : item.icon}}"></image>
           <view style="margin-top:2px;">{{item.title}}</view>
         </view>
       </view>
-    </view>
+    </view> -->
   </view>
 
   <view style="width:100%">

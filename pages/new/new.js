@@ -199,19 +199,24 @@ Page({
   },
 
   onDelete: function () {
+    var that = this.data;
     wx.showModal({
       title: '提示',
       content: '确认删除？',
       success(res) {
         if (res.confirm) {
-          console.log('用户点击确定')
+          if (that.cargoId != 0){            
+              //TODO 后台删除数据
+              wx.switchTab({
+                url: '../mine/mine',
+              });
+          }
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
       }
     })
   },
-
   onHide: function() {
     // 页面隐藏
   },
