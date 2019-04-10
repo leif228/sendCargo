@@ -1,11 +1,11 @@
 // new.js
 // TODO 并不是所有非中文字符宽度都为中文字符宽度一半，需特殊处理
 // TODO 由于文本框聚焦存在bug，故编辑模式待实现
-
 const input = require('../../utils/input');
 const config = require('../../config');
 const geo = require('../../services/geo');
 const util = require('../../utils/util');
+const requestUtil = require('../../utils/reqUtil.js');
 
 const RESOLUTION = 750; // 微信规定屏幕宽度为750rpx
 const MARGIN = 10; // 写字面板左右margin
@@ -85,7 +85,8 @@ Page({
     height: "", //data里面增加height属性
 
     cargoId: 0,
-    cargoValue: ''
+    cargoValue: '',
+    toshowqcy:1
   },
 
   // 显示底部tab
@@ -155,8 +156,8 @@ Page({
     })
 
     if (options) {
-      var cargoId = options.cargoid;
-      var cargoValue = options.value;
+      let cargoId = options.cargoid;
+      let cargoValue = options.value;
       if (cargoId != 0) {
         this.setData({
             'cargoId': cargoId
@@ -197,6 +198,29 @@ Page({
       });
     });
   },
+  showqcy: function (e) {
+    if (e.detail.value == '') {
+      this.setData({toshowqcy:0})
+    }else{
+      this.setData({ toshowqcy: 1 })
+    }
+  },
+  onSubmit:function(e){
+    if (this.data.cargoId == 0){
+      let that = this;
+      let contents = e.detail.value.content;
+      let toqcy = this.data.toshowqcy;
+      requestUtil.post(app.globalData.addUrl, {
+        content: contents,
+        toQcy: toqcy
+       }).then(
+         function(data) {
+           console.log(data);
+           that.setData({ cargoId:data.data.content})
+         }
+      )
+    }
+  },
 
   onDelete: function () {
     var that = this.data;
@@ -207,9 +231,17 @@ Page({
         if (res.confirm) {
           if (that.cargoId != 0){            
               //TODO 后台删除数据
-              wx.switchTab({
-                url: '../mine/mine',
-              });
+            requestUtil.get(app.globalData.delUrl, {
+              cargoId: that.cargoId
+            }).then(
+              function (data) {
+                console.log(data);
+                wx.switchTab({
+                  url: '../mine/mine',
+                });
+              }
+            )
+              
           }
         } else if (res.cancel) {
           console.log('用户点击取消')

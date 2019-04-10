@@ -1,12 +1,12 @@
 <!--list.wxml-->
 
 <scroll-view scroll-y="true" bindscrolltolower="searchScrollLower">
-  <view class="card">
-    <text style="font-size:13px">现急需1000~2000吨散货船，从六都装散货水泥到珠三角，运价高，现金结算，装完货可预支运费。欢迎致电联系：\n冯生：13435992133\n云浮市云安区明盛物流有限公司</text>
+  <view hidden="{{!showCard}}" class="card">
+    <text style="font-size:13px">{{content}}</text>
 
     <view class="desc">
       <view class="left">        
-        <view style="font-size:32rpx;color:darkgray">分享时间：2019.03.09</view>
+        <view style="font-size:32rpx;color:darkgray">分享时间：{{time}}</view>
       </view>      
     </view>
 

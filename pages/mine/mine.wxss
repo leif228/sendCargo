@@ -1,5 +1,9 @@
 /**mine.wxss**/
 
+page{
+height: 100%;
+}
+
 .header {
   height: 65px;
   background: white;

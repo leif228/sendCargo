@@ -7,7 +7,9 @@
 
 
     <view class='bottom'>
-      <checkbox checked='true'>同步发布到请船易</checkbox>
+      <checkbox-group bindchange="showqcy">
+        <checkbox checked='true' value='1'>同步发布到请船易</checkbox>
+      </checkbox-group>
       <button open-type="share" formType="submit" class='btn success'>分享</button>
       <button wx:if='{{cargoId != 0}}' class='btn del' bindtap="onDelete">删除</button>
     </view>

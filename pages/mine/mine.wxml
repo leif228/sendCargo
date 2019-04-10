@@ -48,7 +48,7 @@
             <open-data type="userNickName"></open-data>
           </view>
         </view>
-        <view class="item">分享5条货盘信息</view>
+        <view class="item">分享{{showNums}}条货盘信息</view>
       </view>
       <image class="add" mode="aspectFill" src="../../images/tabbar/add.png" bindtap="touchAddNew"></image>
     </view>
@@ -63,23 +63,25 @@
     </view> -->
   </view>
 
-  <view style="width:100%">
 
-    <scroll-view scroll-y="true" bindscrolltolower="searchScrollLower">
+
+  <scroll-view style='height:400px' scroll-y="true" bindscrolltolower="searchScrollLower">
+    <view wx:for="{{searchSongList}}" wx:for-index="index" wx:for-item="item">
       <view class="card">
-        <text style="font-size:13px">现急需1000~2000吨散货船，从六都装散货水泥到珠三角，运价高，现金结算，装完货可预支运费。欢迎致电联系：\n冯生：13435992188\n云浮市云安区明盛物流有限公司</text>
+        <text style="font-size:13px">{{item.content}}</text>
         <view class="desc">
           <view class="left">
-            <view style="font-size:32rpx;margin:10rpx 0;">阅读数50</view>
-            <view style="font-size:24rpx;color:darkgray">2019.03.09</view>
+            <view style="font-size:32rpx;margin:10rpx 0;">阅读数{{item.readNum}}</view>
+            <view style="font-size:24rpx;color:darkgray">{{item.createTime}}</view>
           </view>
           <view class="right">
-            <image class="add" mode="aspectFill" src="../../images/icons/composeHL.png" bindtap="touchAdd"  data-value='现急需1000~2000吨散货船，从六都装散货水泥到珠三角，运价高，现金结算，装完货可预支运费。欢迎致电联系：\n冯生：13435992188\n云浮市云安区明盛物流有限公司' data-cargoid='8'></image>
+            <image class="add" mode="aspectFill" src="../../images/icons/composeHL.png" bindtap="touchAdd" data-value='{{item.content}}' data-cargoid='{{item.id}}'></image>
           </view>
         </view>
       </view>
+    </view>
 
-      <view class="card">
+    <!-- <view class="card">
         <text style="font-size:13px">现急需1000~2000吨散货船，从六都装散货水泥到珠三角，运价高，现金结算，装完货可预支运费。欢迎致电联系：\n冯生：13435992177\n云浮市云安区明盛物流有限公司</text>
         <view class="desc">
           <view class="left">
@@ -89,14 +91,13 @@
           <view class="right">
             <image class="add" mode="aspectFill" src="../../images/icons/composeHL.png" bindtap="touchAdd" data-cargoid='7' data-value='现急需1000~2000吨散货船，从六都装散货水泥到珠三角，运价高，现金结算，装完货可预支运费。欢迎致电联系：\n冯生：13435992177\n云浮市云安区明盛物流有限公司'></image>
           </view>
-        </view>
-      </view>
+        </view>        
+      </view>-->
 
-      <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view>
-      <view class="loading complete" hidden="{{!searchLoadingComplete}}">已加载全部</view>
-    </scroll-view>
+    <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view>
+    <view class="loading complete" hidden="{{!searchLoadingComplete}}">已加载全部</view>
+  </scroll-view>
 
-  </view>
 
   <template is="{{currentTab}}"></template>
 </view>

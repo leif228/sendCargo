@@ -2,10 +2,11 @@
 
 const config = require('config');
 const diaries = require('demo/diaries');
+const requestUtil = require('utils/reqUtil.js');
 
 App({
 
-  onLaunch: function (ops) {
+  onLaunch: function(ops) {
     // if (ops.scene == 1044) {
     //   console.log(ops.shareTicket)
     //   console.log(ops.query)
@@ -21,23 +22,49 @@ App({
     //   })
     // }
 
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log(res)
-      }
-    })
+    let token = wx.getStorageSync('token');
+    if (!token) {
+      // 登录
+      wx.login({
+        success: res => {
+          // 发送 res.code 到后台换取 openId, sessionKey, unionId
+          console.log('res.code:' + res.code)
+          requestUtil.post(this.globalData.loginUrl, {
+            code: res.code
+          }).then(function(value) {
+            // success
+            if (value.data.returnCode == 'Success') {
+              console.log('successlogin:' + value.data.content);
+              wx.setStorageSync('token', value.data.content);
+            } else {
+              console.log('successlogin:' + value.data.message);
+            }
+
+          }, function(error) {
+            console.log('errorlogin:' + error)
+          });
+        }
+      })
+    }
   },
 
-  onShow: function (ops){
+  onShow: function(ops) {
     if (ops.scene == 1044) {
       console.log(ops.shareTicket)
       console.log(ops.query)
-      //this.globalData.shareCaroId = ops.query.cargoId
+      this.globalData.shareCaroId = ops.query.cargoId
       console.log(ops)
 
-      var shareTicket = ops.shareTicket
+      if (this.globalData.shareCaroId != 0) {
+        requestUtil.get(this.globalData.addReadNumUrl, {
+          cargoId: this.globalData.shareCaroId
+        }).then(
+          function(data) {
+            console.log(data)
+          })
+      }
+
+      let shareTicket = ops.shareTicket
       wx.getShareInfo({
         shareTicket: shareTicket,
         complete(res) {
@@ -142,8 +169,15 @@ App({
     // 用户信息
     userInfo: null,
 
-    shareCaroId:null,
-    
+    shareCaroId: 0,
+
+    loginUrl: 'http://192.168.1.101:8080/shipwx/login',
+    listUrl: 'http://192.168.1.101:8080/shipwx/list',
+    addUrl: 'http://192.168.1.101:8080/shipwx/add',
+    delUrl: 'http://192.168.1.101:8080/shipwx/del',
+    addReadNumUrl: 'http://192.168.1.101:8080/shipwx/addReadNum',
+    getCargoUrl: 'http://192.168.1.101:8080/shipwx/getCargo',
+
   }
 
 })
