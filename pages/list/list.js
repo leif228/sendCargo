@@ -27,18 +27,19 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad() {
-    wx.showShareMenu({
-      withShareTicket: true //要求小程序返回分享目标信息
-    })
+  onLoad() {   
     if (app.globalData.shareCaroId != 0) {
       this.setData({ shareCaroId: app.globalData.shareCaroId});
       let that = this;
+      wx.showLoading({
+        title: '加载中...',
+      });
       requestUtil.get(app.globalData.getCargoUrl, {
         cargoId: app.globalData.shareCaroId
       }).then(
         function(data) {
           console.log(data);
+          wx.hideLoading();
           if (data.data.returnCode == 'Success'){          
             that.setData({
               content: data.data.content.content,
@@ -46,6 +47,8 @@ Page({
               showCard: true
             });
           }
+        },function(error){
+          wx.hideLoading();
         })
     }  
 },

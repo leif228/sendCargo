@@ -86,7 +86,7 @@ Page({
 
     cargoId: 0,
     cargoValue: '',
-    toshowqcy:1
+    toshowqcy: 1
   },
 
   // 显示底部tab
@@ -151,9 +151,9 @@ Page({
 
   // 页面初始化
   onLoad: function(options) {
-    wx.showShareMenu({
-      withShareTicket: true //要求小程序返回分享目标信息
-    })
+     wx.showShareMenu({
+       withShareTicket: true //要求小程序返回分享目标信息
+     })
 
     if (options) {
       let cargoId = options.cargoid;
@@ -178,6 +178,11 @@ Page({
 
     //this.init();
   },
+  textareainput: function (e) {
+    this.setData({
+      'cargoValue': e.detail.value
+    })
+  },
 
   // 页面渲染完成
   onReady: function() {
@@ -198,50 +203,79 @@ Page({
       });
     });
   },
-  showqcy: function (e) {
+  showqcy: function(e) {
     if (e.detail.value == '') {
-      this.setData({toshowqcy:0})
-    }else{
-      this.setData({ toshowqcy: 1 })
+      this.setData({
+        toshowqcy: 0
+      })
+    } else {
+      this.setData({
+        toshowqcy: 1
+      })
     }
   },
-  onSubmit:function(e){
-    if (this.data.cargoId == 0){
-      let that = this;
-      let contents = e.detail.value.content;
-      let toqcy = this.data.toshowqcy;
-      requestUtil.post(app.globalData.addUrl, {
-        content: contents,
-        toQcy: toqcy
-       }).then(
-         function(data) {
-           console.log(data);
-           that.setData({ cargoId:data.data.content})
-         }
-      )
-    }
+  onSubmit: function(e) {
+
+    let contents = e.detail.value.content;
+    this.toadd(contents) 
+  },
+  toadd: function (contents){
+    let that = this;
+    let toqcy = this.data.toshowqcy;
+    wx.showLoading({
+      title: '加载中...',
+    })
+    requestUtil.post(app.globalData.addUrl, {
+      cargoId: this.data.cargoId,
+      content: contents,
+      toQcy: toqcy
+    }).then(
+      function (data) {
+        console.log(data);
+        wx.hideLoading();
+        if (data.data.returnCode == 'Success'){
+          that.setData({
+            cargoId: data.data.content
+          })          
+        }else{
+          wx.showToast({
+            title: '保存失败!',
+            icon: 'fail',
+            duration: 2000
+          })
+        }
+        
+      },function(error){
+        wx.hideLoading();
+        wx.showToast({
+          title: '网络错误，保存失败!',
+          icon: 'fail',
+          duration: 2000
+        })
+      }
+    )
   },
 
-  onDelete: function () {
+  onDelete: function() {
     var that = this.data;
     wx.showModal({
       title: '提示',
       content: '确认删除？',
       success(res) {
         if (res.confirm) {
-          if (that.cargoId != 0){            
-              //TODO 后台删除数据
+          if (that.cargoId != 0) {
+            //TODO 后台删除数据
             requestUtil.get(app.globalData.delUrl, {
               cargoId: that.cargoId
             }).then(
-              function (data) {
+              function(data) {
                 console.log(data);
                 wx.switchTab({
                   url: '../mine/mine',
                 });
               }
             )
-              
+
           }
         } else if (res.cancel) {
           console.log('用户点击取消')
@@ -507,6 +541,8 @@ Page({
     if (res.from === 'button') {
       // 来自页面内转发按钮
       console.log(res.target)
+    }else{      
+      this.toadd(this.data.cargoValue) 
     }
     return {
       title: '货盘分享',

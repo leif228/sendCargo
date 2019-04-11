@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -42,7 +42,7 @@
 					"id": 0,
 					"name": "1044",
 					"pathName": "pages/list/list",
-					"query": "cargoId=11",
+					"query": "cargoId=2",
 					"scene": 1044,
 					"shareInfo": {
 						"groupName": "测试模拟群1",

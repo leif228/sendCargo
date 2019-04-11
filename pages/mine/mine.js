@@ -163,25 +163,32 @@ Page({
 
     if (searchPageNum <= totalPages && !searchLoading) {
       //访问网络  
+      wx.showLoading({
+        title: '加载中...',
+      });
       requestUtil.get(app.globalData.listUrl, {
         pageNo: searchPageNum,
         pageSize: callbackcount
       }).then(
         function(data) {
-          console.log(data)
+          console.log(data);
+          wx.hideLoading();
+          if (data.data.returnCode == 'Success') {
+            let searchList = [];
+            //如果isFromSearch是true从data中取出数据，否则先从原来的数据继续添加  
+            //that.data.isFromSearch ? searchList = data.data.content.list : searchList = that.data.searchSongList.concat(data.data.content.list)
+            searchList = that.data.searchSongList.concat(data.data.content.list);
+            that.setData({
+              totalPages: data.data.content.totalPages,
+              showNums: data.data.content.totalCount,
+              searchSongList: searchList, //获取数据数组  
+              searchLoading: false //把"上拉加载"的变量设为false，显示  
+            });
+          }
 
-          let searchList = [];
-          //如果isFromSearch是true从data中取出数据，否则先从原来的数据继续添加  
-          //that.data.isFromSearch ? searchList = data.data.content.list : searchList = that.data.searchSongList.concat(data.data.content.list)
-          searchList = that.data.searchSongList.concat(data.data.content.list);
-          that.setData({
-            totalPages: data.data.content.totalPages,
-            showNums: data.data.content.totalCount,
-            searchSongList: searchList, //获取数据数组  
-            searchLoading: false //把"上拉加载"的变量设为false，显示  
-          });
         },
         function(error) {
+          wx.hideLoading();
           that.setData({
             searchLoading: false //把"上拉加载"的变量设为false，隐藏  
           });

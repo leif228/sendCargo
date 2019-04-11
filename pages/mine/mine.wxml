@@ -65,7 +65,7 @@
 
 
 
-  <scroll-view style='height:400px' scroll-y="true" bindscrolltolower="searchScrollLower">
+  <scroll-view style='height:600px' scroll-y="true" bindscrolltolower="searchScrollLower">
     <view wx:for="{{searchSongList}}" wx:for-index="index" wx:for-item="item">
       <view class="card">
         <text style="font-size:13px">{{item.content}}</text>
