@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -40,15 +40,10 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "1044",
+					"name": "1008",
 					"pathName": "pages/list/list",
-					"query": "cargoId=2",
-					"scene": 1044,
-					"shareInfo": {
-						"groupName": "测试模拟群1",
-						"shareName": "rnj0ACAD2GFjonHTsPnBuUf6jU8lQgog2jmI-O7arbg@cr4dev",
-						"shareKey": "fiSgS_B5QXzQe3wDCoFkqOFfPgxo5x1vRBb4DlkVyAau0lTeXUEDhqj5tm_3vi0GroPuG3EBpQ2N38cE8bSG2A~~"
-					}
+					"query": "cargoId=1",
+					"scene": 1008
 				}
 			]
 		}

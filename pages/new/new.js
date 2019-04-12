@@ -151,9 +151,9 @@ Page({
 
   // 页面初始化
   onLoad: function(options) {
-     wx.showShareMenu({
-       withShareTicket: true //要求小程序返回分享目标信息
-     })
+    //  wx.showShareMenu({
+    //    withShareTicket: true //要求小程序返回分享目标信息
+    //  })
 
     if (options) {
       let cargoId = options.cargoid;

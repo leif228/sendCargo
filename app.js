@@ -64,7 +64,7 @@ App({
   },
 
   onShow: function(ops) {
-    if (ops.scene == 1044) {
+    if (ops.scene == 1008 || ops.scene == 1007) {
       console.log(ops.shareTicket)
       console.log(ops.query)
       this.globalData.shareCaroId = ops.query.cargoId
