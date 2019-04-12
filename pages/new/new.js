@@ -240,7 +240,7 @@ Page({
         }else{
           wx.showToast({
             title: '保存失败!',
-            icon: 'fail',
+            icon: 'none',
             duration: 2000
           })
         }
@@ -248,8 +248,8 @@ Page({
       },function(error){
         wx.hideLoading();
         wx.showToast({
-          title: '网络错误，保存失败!',
-          icon: 'fail',
+          title: error,
+          icon: 'none',
           duration: 2000
         })
       }
@@ -265,14 +265,33 @@ Page({
         if (res.confirm) {
           if (that.cargoId != 0) {
             //TODO 后台删除数据
+            wx.showLoading({
+              title: '删除中...',
+            })
             requestUtil.get(app.globalData.delUrl, {
               cargoId: that.cargoId
             }).then(
               function(data) {
                 console.log(data);
+                wx.hideLoading();
+                if (data.data.returnCode == 'Success') {
+                }else{
+                  wx.showToast({
+                    title: '删除失败',
+                    icon: 'none',
+                    duration: 2000
+                  })
+                }
                 wx.switchTab({
                   url: '../mine/mine',
                 });
+              }, function (error) {
+                wx.hideLoading();
+                wx.showToast({
+                  title: error,
+                  icon: 'none',
+                  duration: 2000
+                })
               }
             )
 

@@ -32,7 +32,7 @@ Page({
       this.setData({ shareCaroId: app.globalData.shareCaroId});
       let that = this;
       wx.showLoading({
-        title: '加载中...',
+        title: '分享加载中...',
       });
       requestUtil.get(app.globalData.getCargoUrl, {
         cargoId: app.globalData.shareCaroId
@@ -46,9 +46,20 @@ Page({
               time: data.data.content.createTime,
               showCard: true
             });
+          } else {
+            wx.showToast({
+              title: '服务端错误！',
+              icon: 'none',
+              duration: 2000
+            })
           }
         },function(error){
           wx.hideLoading();
+          wx.showToast({
+            title: error,
+            icon: 'none',
+            duration: 2000
+          })
         })
     }  
 },

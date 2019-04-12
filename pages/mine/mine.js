@@ -164,7 +164,7 @@ Page({
     if (searchPageNum <= totalPages && !searchLoading) {
       //访问网络  
       wx.showLoading({
-        title: '加载中...',
+        title: '列表加载中...',
       });
       requestUtil.get(app.globalData.listUrl, {
         pageNo: searchPageNum,
@@ -184,6 +184,12 @@ Page({
               searchSongList: searchList, //获取数据数组  
               searchLoading: false //把"上拉加载"的变量设为false，显示  
             });
+          }else{
+            wx.showToast({
+              title: '服务端错误！',
+              icon: 'none',
+              duration: 2000
+            })
           }
 
         },
@@ -192,7 +198,12 @@ Page({
           that.setData({
             searchLoading: false //把"上拉加载"的变量设为false，隐藏  
           });
-        })
+          wx.showToast({
+            title: error,
+            icon: 'none',
+            duration: 2000
+          })
+        });
       that.setData({
         searchLoading: true //把"上拉加载"的变量设为false，隐藏  
       });

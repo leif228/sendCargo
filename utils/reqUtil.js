@@ -49,7 +49,7 @@ const post = (url, data) => {
           reject(res.data);
         }
       },
-      error: function(e) {
+      fail: function(e) {
         reject('网络出错');
       }
     })
@@ -74,7 +74,7 @@ const get = (url, data) => {
           reject(res.data);
         }
       },
-      error: function(e) {
+      fail: function(e) {
         reject('网络出错');
       }
     })
