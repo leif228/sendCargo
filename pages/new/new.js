@@ -178,7 +178,7 @@ Page({
 
     //this.init();
   },
-  textareainput: function (e) {
+  textareainput: function(e) {
     this.setData({
       'cargoValue': e.detail.value
     })
@@ -217,41 +217,51 @@ Page({
   onSubmit: function(e) {
 
     let contents = e.detail.value.content;
-    this.toadd(contents) 
+    this.toadd(contents, true)
   },
-  toadd: function (contents){
+  toadd: function(contents, toshowToast) {
     let that = this;
     let toqcy = this.data.toshowqcy;
-    wx.showLoading({
-      title: '加载中...',
-    })
+    if (toshowToast) {
+      wx.showLoading({
+        title: '加载中...',
+      })
+    };
+
     requestUtil.post(app.globalData.addUrl, {
       cargoId: this.data.cargoId,
       content: contents,
       toQcy: toqcy
     }).then(
-      function (data) {
+      function(data) {
         console.log(data);
-        wx.hideLoading();
-        if (data.data.returnCode == 'Success'){
+        if (toshowToast) {
+          wx.hideLoading();
+        };
+        if (data.data.returnCode == 'Success') {
           that.setData({
             cargoId: data.data.content
-          })          
-        }else{
+          })
+        } else {
+          if (toshowToast) {
+            wx.showToast({
+              title: '保存失败!',
+              icon: 'none',
+              duration: 2000
+            })
+          }
+        }
+
+      },
+      function(error) {
+        if (toshowToast) {
+          wx.hideLoading();
           wx.showToast({
-            title: '保存失败!',
+            title: error,
             icon: 'none',
             duration: 2000
           })
         }
-        
-      },function(error){
-        wx.hideLoading();
-        wx.showToast({
-          title: error,
-          icon: 'none',
-          duration: 2000
-        })
       }
     )
   },
@@ -274,8 +284,7 @@ Page({
               function(data) {
                 console.log(data);
                 wx.hideLoading();
-                if (data.data.returnCode == 'Success') {
-                }else{
+                if (data.data.returnCode == 'Success') {} else {
                   wx.showToast({
                     title: '删除失败',
                     icon: 'none',
@@ -285,7 +294,8 @@ Page({
                 wx.switchTab({
                   url: '../mine/mine',
                 });
-              }, function (error) {
+              },
+              function(error) {
                 wx.hideLoading();
                 wx.showToast({
                   title: error,
@@ -560,9 +570,8 @@ Page({
     if (res.from === 'button') {
       // 来自页面内转发按钮
       console.log(res.target)
-    }else{      
-      this.toadd(this.data.cargoValue) 
-    }
+    } 
+    this.toadd(this.data.cargoValue, false);
     return {
       title: '货盘分享',
       path: 'pages/list/list?cargoId=' + this.data.cargoId
