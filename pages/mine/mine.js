@@ -125,9 +125,9 @@ Page({
   // 新建日记
   touchAdd: function(event) {
     this.hideModal();
-
+    app.globalData.editCargoValue = event.currentTarget.dataset['value'];
     wx.navigateTo({
-      url: "../new/new?cargoid=" + event.currentTarget.dataset['cargoid'] + "&value=" + event.currentTarget.dataset['value']
+      url: "../new/new?cargoid=" + event.currentTarget.dataset['cargoid']
     });
   },
 

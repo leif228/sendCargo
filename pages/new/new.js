@@ -157,13 +157,13 @@ Page({
 
     if (options) {
       let cargoId = options.cargoid;
-      let cargoValue = options.value;
+      //let cargoValue = options.value;
       if (cargoId != 0) {
         this.setData({
             'cargoId': cargoId
           }),
           this.setData({
-            'cargoValue': cargoValue
+          'cargoValue': app.globalData.editCargoValue
           })
       }
     }
