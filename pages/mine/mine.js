@@ -101,6 +101,17 @@ Page({
     //this.clearTitle();
   },
 
+
+  onHide : function () {
+    this.setData({
+      showNums: 0,
+      searchSongList: [], //放置返回数据的数组    
+      searchPageNum: 1, // 设置加载的第几次，默认是第一次  
+      totalPages: 1,
+      searchLoading: false, //"上拉加载"的变量，默认false，隐藏 
+    })
+  },
+
   // 点击tab项事件
   touchTab: function(event) {
     var tabIndex = parseInt(event.currentTarget.id);

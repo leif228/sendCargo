@@ -42,7 +42,7 @@
 					"id": 0,
 					"name": "1008",
 					"pathName": "pages/list/list",
-					"query": "cargoId=6",
+					"query": "cargoId=1",
 					"scene": 1008
 				}
 			]

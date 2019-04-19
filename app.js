@@ -79,13 +79,13 @@ App({
           })
       }
 
-      let shareTicket = ops.shareTicket
-      wx.getShareInfo({
-        shareTicket: shareTicket,
-        complete(res) {
-          console.log(res)
-        }
-      })
+      // let shareTicket = ops.shareTicket
+      // wx.getShareInfo({
+      //   shareTicket: shareTicket,
+      //   complete(res) {
+      //     console.log(res)
+      //   }
+      // })
     }
   },
 
@@ -188,19 +188,19 @@ App({
 
     editCargoValue:'',
 
-    loginUrl: 'http://192.168.1.101:8080/shipwx/login',
-    listUrl: 'http://192.168.1.101:8080/shipwx/list',
-    addUrl: 'http://192.168.1.101:8080/shipwx/add',
-    delUrl: 'http://192.168.1.101:8080/shipwx/del',
-    addReadNumUrl: 'http://192.168.1.101:8080/shipwx/addReadNum',
-    getCargoUrl: 'http://192.168.1.101:8080/shipwx/getCargo',
+    // loginUrl: 'http://192.168.1.101:8080/shipwx/login',
+    // listUrl: 'http://192.168.1.101:8080/shipwx/list',
+    // addUrl: 'http://192.168.1.101:8080/shipwx/add',
+    // delUrl: 'http://192.168.1.101:8080/shipwx/del',
+    // addReadNumUrl: 'http://192.168.1.101:8080/shipwx/addReadNum',
+    // getCargoUrl: 'http://192.168.1.101:8080/shipwx/getCargo',
 
-    // loginUrl: 'https://wx.qingchuanyi.com/shipwx/login',
-    // listUrl: 'https://wx.qingchuanyi.com/shipwx/list',
-    // addUrl: 'https://wx.qingchuanyi.com/shipwx/add',
-    // delUrl: 'https://wx.qingchuanyi.com/shipwx/del',
-    // addReadNumUrl: 'https://wx.qingchuanyi.com/shipwx/addReadNum',
-    // getCargoUrl: 'https://wx.qingchuanyi.com/shipwx/getCargo',
+    loginUrl: 'https://wx.qingchuanyi.com/shipwx/login',
+    listUrl: 'https://wx.qingchuanyi.com/shipwx/list',
+    addUrl: 'https://wx.qingchuanyi.com/shipwx/add',
+    delUrl: 'https://wx.qingchuanyi.com/shipwx/del',
+    addReadNumUrl: 'https://wx.qingchuanyi.com/shipwx/addReadNum',
+    getCargoUrl: 'https://wx.qingchuanyi.com/shipwx/getCargo',
 
   }
 
